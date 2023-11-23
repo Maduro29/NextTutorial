@@ -9,19 +9,8 @@ import useSWR from 'swr'
 
 export default function Home() {
 
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  const { data, error, isLoading } = useSWR(
-    'http://34.87.168.245:3000/getallauthors',
-    fetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false
-    }
-  );
 
-  console.log(data)
 
   // useEffect(() => {
   //   fetch('http://34.87.168.245:3000/randomauthors')
@@ -34,7 +23,6 @@ export default function Home() {
 
   return (
     <>
-      <div>{data?.authors.length}</div>
       <ul>
         <li>
           <Link href="/facebook" className='nav-link'>facebook</Link>
@@ -46,7 +34,7 @@ export default function Home() {
           <Link href="/youtube" className='nav-link'>youtube</Link>
         </li>
       </ul>
-      <TestTable authors={data?.authors} />
+
     </>
   )
 }

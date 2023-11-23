@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { toast } from 'react-toastify'
 import { useState } from 'react';
+import { mutate } from 'swr';
 
 interface IProps {
     showModal: boolean,
@@ -37,6 +38,7 @@ function CreateModal(props: IProps) {
                 } else {
                     toast.success(data.message)
                     setShowModal(false)
+                    mutate('http://34.87.168.245:3000/getallauthors')
                 }
             }) // handle the parsed data
             .catch(function (res) { console.log(res) })

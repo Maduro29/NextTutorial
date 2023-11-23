@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import CreateModal from './create.modal';
 import { useState } from 'react';
+import UpdateModal from './update.modal';
 
 interface IProps {
     authors: IAuthor[]
@@ -10,7 +11,9 @@ interface IProps {
 
 function TestTable(props: IProps) {
 
+    const [author, setAuthor] = useState<IAuthor | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
 
     const { authors } = props;
     console.log('check props:', authors)
@@ -28,15 +31,20 @@ function TestTable(props: IProps) {
                     </tr>
                 </thead>
                 <tbody>
-                    {authors?.map(author => {
+                    {authors?.map(authorItem => {
                         return (
                             <tr>
-                                <td>{author.id}</td>
-                                <td>{author.name}</td>
+                                <td>{authorItem.id}</td>
+                                <td>{authorItem.name}</td>
                                 {/* <td>{author.avatar}</td> */}
                                 <td>
                                     <Button className='mx-4' variant='secondary'>View</Button>
-                                    <Button className='mx-4' variant='warning'>Edit</Button>
+                                    <Button className='mx-4' variant='warning' onClick={() => {
+                                        setAuthor(authorItem);
+                                        setShowModalUpdate(true);
+                                    }}>
+                                        Edit
+                                    </Button>
                                     <Button className='mx-4' variant='danger'>Delete</Button>
                                 </td>
                             </tr>
@@ -45,6 +53,7 @@ function TestTable(props: IProps) {
                 </tbody>
             </Table>
             <CreateModal showModal={showModal} setShowModal={setShowModal} />
+            <UpdateModal showModal={showModalUpdate} setShowModal={setShowModalUpdate} author={author} setAuthor={setAuthor} />
         </>
     );
 }
