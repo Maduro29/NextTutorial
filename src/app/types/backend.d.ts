@@ -3,3 +3,12 @@ interface IAuthor {
     name: string,
     avatar: string,
 }
+
+interface ISong {
+    id: number,
+    idCategory: number,
+    artUrl: string,
+    nameAuthor: string,
+    pathUrl: string,
+    title: string
+}

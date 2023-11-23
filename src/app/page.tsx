@@ -1,11 +1,6 @@
 'use client'
 
-import Image from 'next/image'
-import styles from './page.module.css'
 import Link from 'next/link'
-import { useEffect } from 'react'
-import TestTable from './components/app.table'
-import useSWR from 'swr'
 
 export default function Home() {
 
