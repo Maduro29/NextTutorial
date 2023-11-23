@@ -1,5 +1,10 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import AppHeader from './components/app.header'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container'
+import AppFooter from './components/app.footer'
+import TestTable from './components/app.table'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AppHeader />
+        <Container>
+          {children}
+          <TestTable />
+        </Container>
+        <AppFooter />
+      </body>
     </html>
   )
 }
