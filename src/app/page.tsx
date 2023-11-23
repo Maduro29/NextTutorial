@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link'
 import { useEffect } from 'react'
+import TestTable from './components/app.table'
 import useSWR from 'swr'
 
 export default function Home() {
@@ -11,8 +12,13 @@ export default function Home() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR(
-    'http://34.87.168.245:3000/randomauthors',
-    fetcher
+    'http://34.87.168.245:3000/getallauthors',
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false
+    }
   );
 
   console.log(data)
@@ -40,6 +46,7 @@ export default function Home() {
           <Link href="/youtube" className='nav-link'>youtube</Link>
         </li>
       </ul>
+      <TestTable authors={data?.authors} />
     </>
   )
 }
